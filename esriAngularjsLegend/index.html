@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>ESRI AngularJS Legend</title>
+
+    <link rel="stylesheet" href="//js.arcgis.com/3.10/js/esri/css/esri.css" />
+    <script src="//js.arcgis.com/3.10/"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.css" />
+
+    <script src="samples.js"></script>
+    <script src="legend/esriAngularJSLegend.dir.js"></script>
+    <link href="legend/esriAngularJSLegend.css" rel="stylesheet" />
+    <script src="tree/angularTreeview.dir.js"></script>
+    <link href="tree/angularTreeview.css" rel="stylesheet" />
+
+    <style>
+        html, body, #mapDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            font-size: 12px;
+        }
+    </style>
+
+    <script>
+        var map;
+        require(["esri/map", "dojo/domReady!"], function (Map) {
+            map = new Map("mapDiv", {
+                center: [-56.049, 38.485],
+                zoom: 3,
+                basemap: "gray"
+            });
+        });
+        var app = angular.module('myApp', ['esriAngularjsLegend', 'angularTreeview']);
+        var legendController = function ($scope) {
+            $scope.map = map;
+            $scope.options = {
+                layers: {
+                    "dynamicLayer": {
+                        show: true,
+                        subLayerIds:[0,2], //only show these two layers in the service
+                        collapsed:true
+                    },
+                    "*": {
+                        show: true,
+                        collapsed: false
+                    }
+                }
+            };
+        };
+
+        var mapController = function ($scope) {
+            $scope.map = map;
+            $scope.activeLayer = null;
+
+            //used to clear the map and set the active layer
+            $scope.$watch("activeLayer", function (newVal, oldVal) {
+                if (!$scope.map || !newVal)
+                    return;
+
+                var basemap = $scope.map.getBasemap();
+                $scope.map.removeAllLayers();
+                $scope.map.setBasemap(basemap);
+                eval(newVal);
+            });
+
+            //used to test code visibility toggle will be reflected in ui
+            $scope.toggleId = function (id) {
+                var lyr = map.getLayer("dynamicLayer");
+                if (lyr) {
+                    lyr.setVisibleLayers([id]);
+                }
+            };
+        }
+    </script>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="mapController">
+        <form>
+            <input type="radio" name="layerType" value="setDynamicMapService(map)" ng-model="activeLayer" />DynamicLayer
+            <input type="radio" name="layerType" value="setGraphicsLayer(map)" ng-model="activeLayer" />GriaphicsLayer
+            <input type="radio" name="layerType" value="setUniqueValueRenderer(map)" ng-model="activeLayer" />Unique Value Renderer
+            <input type="radio" name="layerType" value="setClassBreakRenderer(map)" ng-model="activeLayer" />Class Break Renderer
+            <button ng-click="toggleId(2)">Toggle Layer</button>
+        </form>
+    </div>
+    <div id="mapDiv" style="float:left; width:75%"></div>
+    <div id="legend" style="position:absolute; right:0; top:0; width:25%" ng-controller="legendController">
+        <div esri-legend-dir map="map" options="options"></div>
+    </div>
+</body>
+</html>

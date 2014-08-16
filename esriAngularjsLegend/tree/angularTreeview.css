@@ -1,0 +1,48 @@
+﻿div[tree-view] {
+  /* prevent user selection */
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /* default */
+  font-family: Tahoma;
+  font-size:13px;
+  color: #555;
+  text-decoration: none;
+}
+
+div[tree-view] ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; 
+  border: none;
+  overflow: hidden;
+}
+
+div[tree-view] li {
+  position: relative;
+  padding: 0 0 0 20px;
+  line-height: 20px;
+  list-style-type:none;
+}
+
+div[tree-view] li .toggle {
+  width:13px;
+  padding: 1px 0px;
+}
+
+div[tree-view] li .no-toggle {
+  padding: 1px 7px;
+}
+
+div[tree-view] li i, div[tree-view] li span {
+  cursor: pointer;
+}
+
+div[tree-view] li .selected {
+  background-color: #aaddff;
+  /*font-weight: bold;*/
+  padding: 1px 0px;
+}
