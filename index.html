@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>EsriAngularjsLegend by hewstone</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>EsriAngularjsLegend</h1>
+        <h2>Angular JS ESRI Javascript Legend</h2>
+        <a href="https://github.com/hewstone/esriAngularjsLegend" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a name="the-basics" class="anchor" href="#the-basics"><span class="octicon octicon-link"></span></a>The Basics</h3>
+
+<p>For those of you who are used to the Sliverlight legend from ESRI, switching to java script is painful!  The out of the box legend does not do anything.  This legend make the transition quite a bit easier.  (Download the project and run the index.html file to see it in action.)  With a few lines of code, you can have a legend that does the following:</p>
+
+<ul>
+<li>Automatically adds map layers in tree view</li>
+<li>Checkboxes to toggle layer visibility on/off (disabled when layer not in scale range)</li>
+<li>Collapsible layers</li>
+<li>Auto update legend based on graphic layers render or specified symbols</li>
+</ul><h3>
+<a name="sample-usage" class="anchor" href="#sample-usage"><span class="octicon octicon-link"></span></a>Sample Usage</h3>
+
+<p><strong>Define a controller to specify the layers to show in the legend</strong></p>
+
+<pre><code>&lt;script&gt;
+var legendController = function ($scope) {
+  $scope.map = map;
+
+  //these options are not required
+  $scope.options = {
+     layers: {
+    "dynamicLayer": {
+       show: true,
+       subLayerIds:[0,2], //only show these two layers in the service
+       collapsed:true
+    },
+    "*": {  //all other layers not specified then show them and collapse them on load
+       show: true,
+       collapsed: false
+       }
+     }
+   };
+};
+&lt;/script&gt;
+</code></pre>
+
+<p><strong>Add the legend directive to your markup</strong></p>
+
+<pre><code>&lt;div ng-controller="legendController" id="legend" style="position:absolute; right:0; top:0; width:25%"&gt;
+  &lt;div esri-legend-dir map="map" options="options"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3>
+<a name="required-3rd-party-library-dependencies" class="anchor" href="#required-3rd-party-library-dependencies"><span class="octicon octicon-link"></span></a>Required 3rd Party Library Dependencies</h3>
+
+<ul>
+<li>
+<a href="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js">angularjs</a>(developed with 1.2.16)</li>
+<li>
+<a href="http://js.arcgis.com/3.10/">esri js</a> (developed with 3.10)</li>
+<li>
+<a href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.css">font awesome</a> (developed with 4.10)
+<em>I will soon depreciate the need for this library</em>
+</li>
+</ul><h3>
+<a name="supported-layers-and-renderers" class="anchor" href="#supported-layers-and-renderers"><span class="octicon octicon-link"></span></a>Supported Layers and Renderers</h3>
+
+<p><em>If a renderer is specified the legend will use that.  If no renderer then symbols are used.</em></p>
+
+<p><strong>Layers</strong></p>
+
+<ul>
+<li>ArcGISDynamicMapServiceLayer</li>
+<li>ArcGISTiledMapServieLayer</li>
+<li>FeatureLayer</li>
+<li>GraphicsLayer</li>
+</ul><p><strong>Renderes</strong></p>
+
+<ul>
+<li>Simple Renderer</li>
+<li>UniqueValueRenderer</li>
+<li>ClassBreaksRenderer </li>
+</ul><h3>
+<a name="future-enhancements-coming-soon" class="anchor" href="#future-enhancements-coming-soon"><span class="octicon octicon-link"></span></a>Future Enhancements Coming Soon</h3>
+
+<ul>
+<li>Documentation Page</li>
+<li>Collapse images under layer</li>
+<li>Filter legend by typing tag name</li>
+<li>Layer Opacity adjustment</li>
+<li>Auto hide layers out of scale range</li>
+</ul><h3>
+<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>Created by: <a href="https://github.com/hewstone" class="user-mention">@hewstone</a></p>
+
+<h3>
+<a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h3>
+
+<p>Have a problem or issue.  Open a new issue and I'll look into it.  If you add additional support for layers and/or renderers please share by issuing a pull request.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/hewstone/esriAngularjsLegend/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/hewstone/esriAngularjsLegend/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/hewstone/esriAngularjsLegend"></a> is maintained by <a href="https://github.com/hewstone">hewstone</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
