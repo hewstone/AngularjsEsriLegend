@@ -18,7 +18,7 @@ String.prototype.format = function () {
 };
 
 dojo.require("dojo/Deferred");
-angular.module('esriAngularjsLegend', [])
+angular.module('angularEsriLegend', [])
 .directive('esriLegendDir', ['$timeout', function ($timeout) {
     function ensureDefault(options, prop, value1, value2) {
         if (!options.hasOwnProperty(prop)) {

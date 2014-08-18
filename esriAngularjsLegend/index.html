@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.css" />
 
     <script src="samples.js"></script>
-    <script src="legend/esriAngularJSLegend.dir.js"></script>
-    <link href="legend/esriAngularJSLegend.css" rel="stylesheet" />
+    <script src="legend/angularEsriLegend.dir.js"></script>
+    <link href="legend/angularEsirLegend.css" rel="stylesheet" />
     <script src="tree/angularTreeview.dir.js"></script>
     <link href="tree/angularTreeview.css" rel="stylesheet" />
 
@@ -34,7 +34,7 @@
                 basemap: "gray"
             });
         });
-        var app = angular.module('myApp', ['esriAngularjsLegend', 'angularTreeview']);
+        var app = angular.module('myApp', ['angularEsriLegend', 'angularTreeview']);
         var legendController = function ($scope) {
             $scope.map = map;
             $scope.options = {

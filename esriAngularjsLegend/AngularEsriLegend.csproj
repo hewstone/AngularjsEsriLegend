@@ -59,8 +59,8 @@
   <ItemGroup>
     <Content Include="tree\angularTreeview.css" />
     <Content Include="tree\angularTreeview.dir.js" />
-    <Content Include="legend\esriAngularJSLegend.css" />
-    <Content Include="legend\esriAngularJSLegend.dir.js" />
+    <Content Include="legend\angularEsriLegend.css" />
+    <Content Include="legend\angularEsriLegend.dir.js" />
     <Content Include="index.html" />
     <Content Include="samples.js" />
   </ItemGroup>
